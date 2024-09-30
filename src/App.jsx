@@ -3,7 +3,6 @@ import { useState } from 'react'
 import './App.css'
 
 function App() {
-  // const num1 = 10, num2 = 2;
   const [num1, setNum1] = useState(10)
   const [num2, setNum2] = useState(2)
 
@@ -12,8 +11,18 @@ function App() {
   const [multiply, setMultiply] = useState(0)
   const [divide, setDivide] = useState(0)
 
+  const [mode, setMode] = useState(false)
+  const changeTheme = () => {
+    
+    if (mode == false) {
+      setMode(true)
+
+    } else {
+      setMode(false)
+    }
+  }
   return (
-    <div className='flex flex-col items-center justify-center h-[60vh]'>
+    <div className={ mode == false ? 'bg-white w-full h-screen flex flex-col items-center justify-center text-black':"bg-gray-800 w-full h-screen flex flex-col items-center justify-center text-white" }>
         <p className='text-2xl'>Set the numbers to apply the math operations</p>
       <div className='flex text-4xl justify-center my-5 max-md:flex-col'>
         <div className='flex mx-2'>
@@ -51,6 +60,11 @@ function App() {
         <button className='btn bg-pink-200' onClick={() => {setDivide(num1 / num2)}}>Divide</button>
         </div>
       </div>
+      <div className='flex flex-col items-center my-5'>
+        <p className={ mode == false ? 'text-black text-3xl' : 'text-white text-3xl'}>The page now in the {mode == false ? 'light' : 'dark'} mode</p>
+        <button className={ mode == false ? 'bg-black btn text-white my-3': "bg-white btn hover:bg-white text-black my-3" } onClick={changeTheme}>Change theme</button>
+
+     </div>
     </div>
   )
 }
